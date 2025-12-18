@@ -11,7 +11,7 @@ services:
       TZ: Asia/Tokyo
     command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3306:3306"
+      - "33306:3306"
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
@@ -27,11 +27,6 @@ services:
     working_dir: /var/www/html
     env_file:
       - ../laravel/.env
-    environment:
-      DB_HOST: db
-      DB_DATABASE: app
-      DB_USERNAME: app
-      DB_PASSWORD: app
     volumes:
       - ../laravel:/var/www/html
     depends_on:
