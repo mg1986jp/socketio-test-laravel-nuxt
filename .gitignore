@@ -1,0 +1,35 @@
+# Common
+.DS_Store
+.idea/
+.env
+.env.*
+
+# Node
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# PHP / Laravel
+vendor/
+**/vendor/
+/storage/*.key
+/storage/*.log
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/storage/framework/cache/data/*
+/bootstrap/cache/*.php
+
+# Nuxt build outputs
+.nuxt/
+.output/
+.cache/
+dist/
+
+# Others
+*.sqlite
