@@ -6,5 +6,5 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    // Base controller for API endpoints
+    // 全コントローラのベースクラス
 }
