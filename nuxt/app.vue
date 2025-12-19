@@ -5,19 +5,49 @@ const navLinks = [
   { to: '/login', label: 'Login' },
   { to: '/profile', label: 'Profile' },
 ]
+
+const { message, color } = useFlash()
+const snack = ref(false)
+
+watch(message, (val) => {
+  if (val) {
+    snack.value = true
+  }
+})
+
+const closeSnack = () => {
+  snack.value = false
+  message.value = ''
+}
 </script>
 
 <template>
-  <div class="layout">
-    <header class="header">
-      <NuxtLink v-for="link in navLinks" :key="link.to" :to="link.to">
-        {{ link.label }}
-      </NuxtLink>
-    </header>
-    <main>
-      <NuxtPage />
-    </main>
-  </div>
+  <v-app>
+    <div class="layout">
+      <header class="header">
+        <NuxtLink v-for="link in navLinks" :key="link.to" :to="link.to">
+          {{ link.label }}
+        </NuxtLink>
+      </header>
+      <main>
+        <NuxtPage />
+      </main>
+      <client-only>
+        <v-snackbar
+          v-model="snack"
+          :color="color"
+          timeout="3000"
+          multi-line
+          location="top"
+        >
+          {{ message }}
+          <template #actions>
+            <v-btn icon="mdi-close" variant="text" @click="closeSnack" />
+          </template>
+        </v-snackbar>
+      </client-only>
+    </div>
+  </v-app>
 </template>
 
 <style scoped>
