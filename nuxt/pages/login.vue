@@ -1,17 +1,13 @@
 <script setup lang="ts">
-const { login, errorMessage } = useAuth()
+const { login, errorMessage, submitting } = useAuth()
 
 const form = reactive({
   email: '',
   password: '',
 })
 
-const submitting = ref(false)
-
 const onSubmit = async () => {
-  submitting.value = true
   await login({ ...form })
-  submitting.value = false
 }
 </script>
 

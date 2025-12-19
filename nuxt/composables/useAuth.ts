@@ -17,6 +17,7 @@ export const useAuth = () => {
 
   const user = useState<User | null>('auth_user', () => null)
   const errorMessage = useState<string | null>('auth_error', () => null)
+  const submitting = useState<boolean>('auth_submitting', () => false)
 
   const setToken = (value: string) => {
     token.value = value
@@ -40,6 +41,7 @@ export const useAuth = () => {
 
   const register = async (payload: { name: string; email: string; password: string; password_confirmation: string }) => {
     errorMessage.value = null
+    submitting.value = true
     try {
       const res = await $fetch<{ user: User; token: string }>(`${apiBase}/auth/register`, {
         method: 'POST',
@@ -51,11 +53,14 @@ export const useAuth = () => {
       await navigateTo('/profile')
     } catch (error: any) {
       errorMessage.value = parseError(error)
+    } finally {
+      submitting.value = false
     }
   }
 
   const login = async (payload: { email: string; password: string }) => {
     errorMessage.value = null
+    submitting.value = true
     try {
       const res = await $fetch<{ user: User; token: string }>(`${apiBase}/auth/login`, {
         method: 'POST',
@@ -67,6 +72,8 @@ export const useAuth = () => {
       await navigateTo('/profile')
     } catch (error: any) {
       errorMessage.value = parseError(error)
+    } finally {
+      submitting.value = false
     }
   }
 
@@ -118,6 +125,7 @@ export const useAuth = () => {
     token,
     user,
     errorMessage,
+    submitting,
     register,
     login,
     fetchMe,

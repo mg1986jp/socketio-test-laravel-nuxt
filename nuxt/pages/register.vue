@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { register, errorMessage } = useAuth()
+const { register, errorMessage, submitting } = useAuth()
 
 const form = reactive({
   name: '',
@@ -8,12 +8,8 @@ const form = reactive({
   password_confirmation: '',
 })
 
-const submitting = ref(false)
-
 const onSubmit = async () => {
-  submitting.value = true
   await register({ ...form })
-  submitting.value = false
 }
 </script>
 
