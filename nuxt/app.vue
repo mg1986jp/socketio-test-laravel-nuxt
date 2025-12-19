@@ -1,10 +1,18 @@
+<script setup lang="ts">
+const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/register', label: 'Register' },
+  { to: '/login', label: 'Login' },
+  { to: '/profile', label: 'Profile' },
+]
+</script>
+
 <template>
   <div class="layout">
     <header class="header">
-      <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/register">Register</NuxtLink>
-      <NuxtLink to="/login">Login</NuxtLink>
-      <NuxtLink to="/profile">Profile</NuxtLink>
+      <NuxtLink v-for="link in navLinks" :key="link.to" :to="link.to">
+        {{ link.label }}
+      </NuxtLink>
     </header>
     <main>
       <NuxtPage />
