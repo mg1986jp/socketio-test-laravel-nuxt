@@ -9,6 +9,10 @@ const form = reactive({
 })
 
 const onSubmit = async () => {
+  if (form.password !== form.password_confirmation) {
+    errorMessage.value = 'パスワードが一致しません'
+    return
+  }
   await register({ ...form })
 }
 </script>
